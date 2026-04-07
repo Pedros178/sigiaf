@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { verificarToken } = require('../middlewares/auth.middleware');
+const { obtenerActivos, obtenerActivoPorId, obtenerActivoPorQR, crearActivo, actualizarActivo, eliminarActivo } = require('../controllers/activos.controller');
+router.get('/', verificarToken, obtenerActivos);
+router.get('/qr/:codigo', verificarToken, obtenerActivoPorQR);
+router.get('/:id', verificarToken, obtenerActivoPorId);
+router.post('/', verificarToken, crearActivo);
+router.put('/:id', verificarToken, actualizarActivo);
+router.delete('/:id', verificarToken, eliminarActivo);
+module.exports = router;
