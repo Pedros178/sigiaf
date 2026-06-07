@@ -3,7 +3,11 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true,
+}));
 app.use(express.json());
 
 app.use('/api/auth',           require('./routes/auth.routes'));
@@ -24,5 +28,5 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor SIGIAF corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor SIGIAF corriendo en puerto ${PORT}`);
 });
